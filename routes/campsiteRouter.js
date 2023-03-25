@@ -21,4 +21,24 @@ campsiteRouter.route('/')
     res.end('Deleting all campsites');
 });
 
+campsiteRouter.route('/:campsiteId')
+.all((req, res, next) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    next();
+})
+.get((req, res) => {
+    res.end(`Sending details of the campsite ${req.params.campsiteId}`);
+})
+.post ((req, res) => {
+    res.statusCode = 403;
+    res.end('POST request not supported')
+})
+.put((req, res) => {
+    res.end(`Will update the campsite ${req.body.name} and description of ${req.body.description}`)
+})
+.delete((req, res) => {
+    res.end(`Deleting campsite: ${req.params.campsiteId}`)
+})
+
 module.exports = campsiteRouter;
